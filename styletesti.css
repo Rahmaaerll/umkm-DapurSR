@@ -1,0 +1,46 @@
+header {
+  position: relative;
+  background-image: url('foto/about-bg.jpg'); /
+  background-size: cover;
+  background-position: center;
+  color: white;
+  text-align: center;
+  padding: 5rem 1rem;
+}
+
+header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4); /
+  z-index: 0;
+}
+
+header .container {
+  position: relative;
+  z-index: 1;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+#formKomentar {
+  max-width: 600px;
+}
+
+#daftarKomentar .card-title {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+#daftarKomentar .card-text {
+  font-size: 1rem;
+}
+
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+}

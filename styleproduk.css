@@ -1,0 +1,35 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #fefefe;
+  }
+  
+  header {
+    .header-bg {
+      position: relative;
+      background-image: url('css/about-bg.jpg');
+      background-size: cover;
+      background-position: center;
+    }
+    
+    .header-bg::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.4); /* semi-transparan hitam */
+    }
+    
+    .header-bg .container {
+      position: relative;
+      z-index: 1;
+    }
+  }
+  
+  .card-title {
+    font-weight: 600;
+  }
+  
+  footer {
+    background-color: #343a40;
+    color: white;
+  }
+  
