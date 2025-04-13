@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Keranjang - Dapur SR</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+
+<header class="text-white text-center py-5" style="background-image: url('foto/about-bg.jpg'); background-size: cover; background-position: center;">
+  <img src="foto/logo.jpeg" alt="Logo Dapur SR" style="width: 120px; margin-bottom: 20px;">
+  <h1>Keranjang Belanja</h1>
+  <p>Periksa kembali pilihan Anda sebelum melanjutkan ke pembayaran</p>
+</header>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" href="#">Dapur SR</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Beranda</a></li>
+        <li class="nav-item"><a class="nav-link" href="produk.html">Produk</a></li>
+        <li class="nav-item"><a class="nav-link active" href="keranjang.html">Keranjang</a></li>
+        <li class="nav-item"><a class="nav-link" href="pembayaran.html">Pembayaran</a></li>
+        <li class="nav-item"><a class="nav-link" href="testimoni.html">Testimoni</a></li>
+        <li class="nav-item"><a class="nav-link" href="tentang.html">Tentang Kami</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<section class="container my-5">
+  <h2 class="text-center mb-4">Keranjang Anda</h2>
+  <div id="keranjangList" class="row row-cols-1 row-cols-md-2 g-4"></div>
+  <div class="text-center mt-4">
+    <h3>Total Belanja: Rp <span id="totalHarga">0</span></h3>
+    <a href="pembayaran.html" class="btn btn-dark mt-2">Klik untuk Pembayaran</a>
+  </div>
+</section>
+
+<footer class="bg-dark text-white text-center py-4">
+  <div class="container">
+    <p class="mb-1">&copy; 2025 Dapur SR. All rights reserved.</p>
+    <p class="mb-1">Alamat : Jl. Kenanga No. 7, Surabaya, Jawa Timur</p>
+    <p class="mb-1">Hubungi kami : 
+      <a href="https://wa.me/6289612502437" class="text-white">WhatsApp</a> | 
+      <a href="mailto:dapursr@gmail.com" class="text-white">Email</a>
+    </p>
+    <p>Ikuti kami di :
+      <a href="https://instagram.com/dapursr" class="text-white">Instagram</a>
+    </p>
+  </div>
+</footer>
+
+<script>
+  let keranjang = [
+    { produk: "Kue Coklat", harga: 30000, jumlah: 0 },
+    { produk: "Kue Keju", harga: 35000, jumlah: 0 },
+    { produk: "Kue Nastar", harga: 40000, jumlah: 0 },
+    { produk: "Kue Putri Salju", harga: 38000, jumlah: 0 },
+    { produk: "Kue Kacang", harga: 32000, jumlah: 0 },
+    { produk: "Kue Sagu", harga: 30000, jumlah: 0 }
+  ];
+
+  function tampilkanKeranjang() {
+    const list = document.getElementById("keranjangList");
+    list.innerHTML = "";
+    let total = 0;
+
+    keranjang.forEach((item, index) => {
+      const subtotal = item.harga * item.jumlah;
+      total += subtotal;
+
+      const card = document.createElement("div");
+      card.classList.add("col");
+      card.innerHTML = `
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">${item.produk}</h5>
+            <p>Harga per toples: Rp ${item.harga.toLocaleString()}</p>
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <button class="btn btn-sm btn-danger" onclick="ubahJumlah(${index}, -1)">-</button>
+              <span><strong>${item.jumlah}</strong></span>
+              <button class="btn btn-sm btn-success" onclick="ubahJumlah(${index}, 1)">+</button>
+            </div>
+            <p>Subtotal: Rp ${subtotal.toLocaleString()}</p>
+            <button class="btn btn-outline-danger btn-sm w-100" onclick="hapusItem(${index})">Hapus</button>
+          </div>
+        </div>
+      `;
+      list.appendChild(card);
+    });
+
+    document.getElementById("totalHarga").textContent = total.toLocaleString();
+  }
+
+  function ubahJumlah(index, delta) {
+    if (!keranjang[index]) return;
+    keranjang[index].jumlah += delta;
+    if (keranjang[index].jumlah < 1) keranjang[index].jumlah = 1;
+    tampilkanKeranjang();
+  }
+
+  function hapusItem(index) {
+    keranjang.splice(index, 1);
+    tampilkanKeranjang();
+  }
+
+  window.onload = tampilkanKeranjang;
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

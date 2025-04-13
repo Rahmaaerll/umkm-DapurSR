@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Testimoni - Dapur SR</title>
+    <!-- Link ke Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/styletesti.css">
+</head>
+<body>
+    <header style="background-image: url('foto/about-bg.jpg'); background-size: cover; background-position: center;" class="text-white text-center py-5">
+        <img src="foto/logo.jpeg" alt="Logo Dapur SR" style="width: 120px; margin-bottom: 20px;">
+        <h1>Testimoni Pelanggan - Dapur SR</h1>
+        <p>Ulasan dan feedback dari pelanggan yang puas dengan kue kering kami</p>
+    </header>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Dapur SR</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Beranda</a></li>
+                    <li class="nav-item"><a class="nav-link" href="produk.html">Produk</a></li>
+                    <li class="nav-item"><a class="nav-link" href="keranjang.html">Keranjang</a></li>
+                    <li class="nav-item"><a class="nav-link" href="pembayaran.html">Pembayaran</a></li>
+                    <li class="nav-item"><a class="nav-link" href="testimoni.html">Testimoni</a></li>
+                    <li class="nav-item"><a class="nav-link" href="tentang.html">Tentang Kami</a></li>                
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <h2 class="mb-4">Testimoni dari Pelanggan</h2>
+        <hr>
+        <h3 class="mt-5">Tinggalkan Komentar</h3>
+            <form id="formKomentar">
+    <div class="mb-3">
+        <label for="nama" class="form-label">Nama :
+            <br>Sertakan alamat setelah nama cth: - Surabaya
+        </label>
+        <input type="text" class="form-control" id="nama" required>
+    </div>
+    <div class="mb-3">
+        <label for="pesan" class="form-label">Komentar :</label>
+        <textarea class="form-control" id="pesan" rows="3" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-dark">Kirim</button>
+    </form>
+
+    <div class="mt-5">
+        <h4>Komentar Pengunjung:</h4>
+    <div id="daftarKomentar"></div>
+    </div>
+
+        
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Rina - Jakarta</h5>
+                <p class="card-text">"Cookies Cokelat dari Dapur SR benar-benar enak! Rasanya lembut dan cokelatnya sangat terasa. Kue kering ini jadi favorit keluarga saya setiap hari raya!"</p>
+            </div>
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Agus - Bandung</h5>
+                <p class="card-text">"Butter Cookies yang saya pesan benar-benar lumer di mulut. Rasanya gurih dan tidak terlalu manis. Sangat cocok untuk teman minum teh di sore hari. Pasti beli lagi!"</p>
+            </div>
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Lisa - Surabaya</h5>
+                <p class="card-text">"Putri Salju Dapur SR sangat lezat! Gula halusnya pas dan tekstur kue-nya sangat lembut. Kue ini membuat momen lebaran kami semakin spesial!"</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tampilkan komentar yang tersimpan
+        const daftarKomentar = JSON.parse(localStorage.getItem('komentar')) || [];
+        function tampilkanKomentar() {
+        const container = document.getElementById('daftarKomentar');
+        container.innerHTML = '';
+        daftarKomentar.forEach(k => {
+            const card = document.createElement('div');
+            card.className = 'card mb-3';
+            card.innerHTML = `
+            <div class="card-body">
+                <h5 class="card-title">${k.nama}</h5>
+                <p class="card-text">${k.pesan}</p>
+            </div>`;
+            container.appendChild(card);
+        });
+        }
+        tampilkanKomentar();
+
+        // Tangani form komentar
+        document.getElementById('formKomentar').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const nama = document.getElementById('nama').value.trim();
+        const pesan = document.getElementById('pesan').value.trim();
+        if (nama && pesan) {
+            daftarKomentar.push({ nama, pesan });
+            localStorage.setItem('komentar', JSON.stringify(daftarKomentar));
+            tampilkanKomentar();
+            this.reset();
+        }
+        });
+    </script>
+
+    <footer class="bg-dark text-white text-center py-4">
+        <div class="container">
+          <p class="mb-1">&copy; 2025 Dapur SR. All rights reserved.</p>
+          <p class="mb-1">Alamat : Jl. Kenanga No. 7, Surabaya, Jawa Timur</p>
+          <p class="mb-1">Hubungi kami : 
+            <a href="https://wa.me/6289612502437" class="text-white">WhatsApp</a> | 
+            <a href="mailto:dapursr@gmail.com" class="text-white">Email</a>
+          </p>
+          <p>Ikuti kami di :
+            <a href="https://instagram.com/dapursr" class="text-white">Instagram</a>
+          </p>
+        </div>
+      </footer>
+
+    <!-- Link ke Bootstrap JS dan Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
